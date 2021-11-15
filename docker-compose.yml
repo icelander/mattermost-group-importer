@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  mattermost-group-importer:
+    build: .
+    volumes:
+      - ./conf:/usr/src/app/conf
+    environment:
+      - MATTERMOST_URL=${MATTERMOST_URL}
+      - MATTERMOST_TOKEN=${MATTERMOST_TOKEN}

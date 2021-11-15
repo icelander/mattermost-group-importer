@@ -1,0 +1,44 @@
+# Script will create teams and channels if they do not exist, and will update
+#    existing teams to match properties
+teams:
+  a-team:
+    DisplayName: "A Team"
+    Description: "This is a team description"
+    Public: true # Teams are private by default
+  another-team:
+    DisplayName: "Another Team"
+    Description: "This is another team description"
+    AllowedDomains: "example.com" # Limits members to people with this email domain
+
+# Channels to be created
+channels:
+  a-team: # Team to create channels in
+    admin-chat: # name of the channel
+      DisplayName: "Administrator Chat"
+    support-team:
+      DisplayName: "Support Channel"
+      Public: true
+  another-team:
+    support-team:
+      DisplayName: "Support Channel"
+      Public: true
+
+# Groups to Link
+groups:
+  admin:
+    team: # Group will be added to this team
+      - a-team
+    team_admins: # ... and team admins for this team
+      - another-team
+    channels: # They'll be added to this channel
+      - a-team:admin-chat
+    channel_admins: # and be channel admins for these teams
+      - a-team:support-team
+      - another-team:support-team
+  a-group:
+    teams:
+      - another-team
+    channels:
+      - another-team:support-team
+    channel_admins:
+      - doop:public-relations
